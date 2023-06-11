@@ -1,0 +1,19 @@
+name: Build and publish a Docker image
+on: [push]
+
+jobs:
+  build:
+    name: Build & push docker image
+    runs-on: ubuntu-latest
+    #env:
+    #  IMG_NAME: ${{ github.repository }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Build-push
+        uses: mr-smithers-excellent/docker-build-push@v6
+        with:
+            image: hopar/flask:latest
+            registry: docker.io
+            username: ${{ secrets.DOCKER_USERNAME }}
+            password: ${{ secrets.DOCKER_PASSWORD }}        
