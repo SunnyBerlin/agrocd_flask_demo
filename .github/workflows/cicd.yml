@@ -23,7 +23,7 @@ jobs:
       
       - name: Deploy
         run: |
-              cat ${{ secrets.KUBE_CONFIG_FILE }} > cfg.yaml
+              echo ${{ secrets.KUBE_CONFIG_FILE }} > cfg.yaml
               kubectl --kubeconfig=cfg.yaml get nodes
               helm repo add deploy-flask https://nimramubashir.github.io/deploy-flask/  --kubeconfig cfg.yaml
               helm install my-deploy-flask deploy-flask/deploy-flask --version 0.1.0  -f infra/testing-values.yaml --kubeconfig cfg.yaml
